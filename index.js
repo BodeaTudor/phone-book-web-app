@@ -47,7 +47,7 @@ window.PhoneBook = {
                 <td>${item.firstName}</td>
                 <td>${item.lastName}</td>
                 <td>${item.phoneNumber}</td>
-                <td><a href="#" class="delete-person-from-agenda fa fa-trash"></a>
+                <td><a href="#" class="delete-person-from-agenda fa fa-trash" data-id="${item.id}"></a>
                     <a href="#" class="edit-number-from-agenda fa fa-pencil" data-id="${item.id}" data-phone-number="${item.phoneNumber}"></a> </td>
             </tr>`
     },
@@ -66,6 +66,15 @@ window.PhoneBook = {
         })
     },
 
+    deleteItem: function (itemId) {
+        $.ajax({
+            url: PhoneBook.API_BASE_URL + "?id=" + itemId,
+            method: "DELETE",
+        }).done(function (response) {
+            PhoneBook.getItems();
+        })
+    },
+
     bindEvents: function () {
         $("#new-person-form").submit(function (event) {
             event.preventDefault();
@@ -76,6 +85,13 @@ window.PhoneBook = {
                 var phoneNumber = $("#phone-number-field").val();
                 PhoneBook.updateItem(PhoneBook.editId, phoneNumber);
             }
+        });
+        $("#agenda-items-table").delegate(".delete-person-from-agenda", "click", function (event) {
+            event.preventDefault();
+
+            var itemId = $(this).data("id");
+
+            PhoneBook.deleteItem(itemId);
         });
 
         $("#agenda-items-table").delegate(".edit-number-from-agenda", "click", function (event) {
