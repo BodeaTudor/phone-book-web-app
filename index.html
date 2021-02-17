@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Phone Book</title>
+    <script src="https://use.fontawesome.com/e93a8975bd.js"></script>
+</head>
+<body>
+
+<div class="content"></div>
+<h1>Your Phone Book</h1>
+
+<h3>Add new person</h3>
+<form id="new-person-form">
+    <label for="first-name-field">First Name:</label>
+    <input type="text" id="first-name-field" placeholder="First">
+    <label for="last-name-field">Last Name:</label>
+    <input type="text" id="last-name-field" placeholder="Last">
+    <label for="phone-number-field">Phone Number:</label>
+    <input type="text" id="phone-number-field" placeholder="Please use only numbers!">
+    <input type="submit">
+</form>
+
+<table id="agenda-items-table">
+    <thead>
+    <tr>
+        <th>FirstName</th>
+        <th>LastName</th>
+        <th>PhoneNumber</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td><a href="#" class="delete-person-from-agenda fa fa-trash"></a>
+            <a href="#" class="edit-number-from-agenda fa fa-pencil"></a></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
