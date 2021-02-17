@@ -18,9 +18,36 @@ window.PhoneBook = {
             contentType: "application/json",
             data: JSON.stringify(item)
         }).done(function (response) {
-            console.log(response);
+            PhoneBook.getItems();
             location.reload();
         })
+    },
+
+    getItems: function () {
+        $.ajax({
+            url: PhoneBook.API_BASE_URL,
+            method: "GET",
+        }).done(function (response) {
+            PhoneBook.displayItems(JSON.parse(response));
+        })
+    },
+
+    displayItems: function (items) {
+        var tableBodyHtml = "";
+
+        items.forEach(item => tableBodyHtml += PhoneBook.getItemRow(item));
+
+        $('#agenda-items-table tbody').html(tableBodyHtml);
+    },
+
+    getItemRow: function (item) {
+        return `<tr>
+                <td>${item.firstName}</td>
+                <td>${item.lastName}</td>
+                <td>${item.phoneNumber}</td>
+                <td><a href="#" class="delete-person-from-agenda fa fa-trash"></a>
+                    <a href="#" class="edit-number-from-agenda fa fa-pencil"></a> </td>
+            </tr>`
     },
 
     bindEvents: function () {
@@ -32,4 +59,5 @@ window.PhoneBook = {
     }
 };
 
+PhoneBook.getItems();
 PhoneBook.bindEvents();
